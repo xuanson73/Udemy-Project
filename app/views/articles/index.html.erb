@@ -12,8 +12,12 @@
 <tr>
     <th><%= article.title %></th>
     <th><%= article.description %></th>
-    <th></th>
+    <th><%= link_to 'edit',edit_article_path(article) %></th>
+    <th><%= link_to 'show',article_path(article) %></th>
+    <th><%= link_to 'delete',article_path(article), method: :delete %></th>
     <% end %>
 </tr>
 </tbody>
 </table>
+<%= link_to 'Home page', root_path%>
+<br><%= link_to 'Creat a new article', new_article_path%>
