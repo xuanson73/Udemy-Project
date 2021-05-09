@@ -1,23 +1,33 @@
-<h1>Article index page</h1>
-<table>
-<thead>
-    <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Actions</th>
-    </tr>
-</thead>
-<tbody>
-<% @articles.each do |article| %>
-<tr>
-    <th><%= article.title %></th>
-    <th><%= article.description %></th>
-    <th><%= link_to 'edit',edit_article_path(article) %></th>
-    <th><%= link_to 'show',article_path(article) %></th>
-    <th><%= link_to 'delete',article_path(article), method: :delete %></th>
-    <% end %>
-</tr>
-</tbody>
-</table>
-<%= link_to 'Home page', root_path%>
-<br><%= link_to 'Creat a new article', new_article_path%>
+<div id="page-content">
+    <h1 class="text-center mt-5">Listing all Article</h1>
+    <div class="container">
+        <% @articles.each do |article| %>
+        <div class="row justify-content-md-center">
+            <div class="col-8 mt-1">
+                <div class="card text-center border-success mb-3 shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="card-header"> 
+                        Created by SonNX10
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= link_to article.title, articles_path(article) %></h5>
+                        <p class="card-text"><%= article.description%></p>
+                        <a href="#" class="btn btn-outline-success">Show</a>
+                        <a href="#" class="btn btn-outline-info">Edit</a>
+                        <a href="#" class="btn btn-outline-danger">Delete</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                      <small>
+                       Created
+                       <%= time_ago_in_words(article.created_at)%> Ago ,
+                       Edited
+                       <%= time_ago_in_words(article.updated_at)%> Ago
+                    </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%end%>
+    </div>
+    <%= link_to 'Home page', root_path%>
+    <br><%= link_to 'Creat a new article', new_article_path%>
+</div>
