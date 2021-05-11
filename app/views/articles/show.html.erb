@@ -1,7 +1,29 @@
 <div id="page-content">
-        <h1 class="row justify-content-center">Show acticle details</h1>
-        <p><strong>Title:</strong><%=@article.title%></p>
-        <p><strong>Description:</strong><%=@article.description%></p>
-        <%= link_to 'Article list', articles_path%>
-    
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-8 mt-5">
+                <div class="card text-center border-success mb-3 shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="card-header"> 
+                        Created by SonNX10
+                    </div>
+                    <div class="card-body">
+                        <h4 class="text-center mt-5"><%= @article.title%></h4>
+                        <h4 class="text-center mt-5"><%= @article.description%></h4>
+                        <%= link_to "Edit", edit_article_path(@article), class:"btn btn-outline-success"%>
+                        <%= link_to "Destroy", article_path(@article), class:"btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"}%>
+                    </div>
+                    <div class="card-footer text-muted">
+                      <small>
+                       Created
+                       <%= time_ago_in_words(@article.created_at)%> Ago ,
+                       Edited
+                       <%= time_ago_in_words(@article.updated_at)%> Ago
+                    </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%= link_to 'Home page', root_path%>
+    <br><%= link_to 'Creat a new article', new_article_path%>
 </div>
