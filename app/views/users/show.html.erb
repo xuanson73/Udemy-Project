@@ -1,7 +1,9 @@
-
-<div class="text-content mt-5 center">
-<h1 >Profile</h1>
-<%= @user.username %> 
-<%= gravatar_for @user, size: 200 %>
-</div>
+<div id="page-content">
+    <div class="text-content mt-5 center">
+        <h1 >Profile</h1>
+        <%= @user.username %> 
+        <%= gravatar_for @user, size: 200 %>
+        <br>
+        <%= link_to "Edit Profile", edit_user_path(@user), class:"btn btn-outline-success"%>
+    </div>
 <%= render 'articles/article'%>

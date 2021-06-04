@@ -28,7 +28,8 @@ class UsersController < ApplicationController
 
     def update
         if @user.update(user_params)
-            redirect_to @user
+            flash[:notice]="You seccessfull to update user"
+            redirect_to user_path
         else
             render 'edit'
         end
