@@ -1,18 +1,24 @@
 class SessionsController < ApplicationController
 
-    def new
-        
+    def new    
     end
 
-    def 
-        @user = User.find(email: params[:session][:email].downcase)
-         if @user.login
+    def create
+        user = User.find_by(email: params[:sessions][:email].downcase)
+         if user && user.authenticate(params[:sessions][:password])
+           session[:user_id] = user.id
             flash[:success] = 'you loged to my app'
+            redirect_to user
          else
-            render :new
+            flash.now[:alert] = "have someting wrong "
+            render 'new'
+         end
     end
 
-    def Destroy
+    def destroy
+        session[:user_id] = nil
+        flash[:alert] = "You are loged out"
+        redirect_to root_path
     end
 
 end

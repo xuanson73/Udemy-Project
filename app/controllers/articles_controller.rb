@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
 
     def create
         @article = Article.new(article_params)
-        @article.user = User.first
+        @article.user = @current_user
         if @article.save
             flash[:success] = "Article was created successfully"
             redirect_to @article
@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
             flash[:success] = "Article was successfully updated"
             redirect_to @article
         else
-            render :edit
+            render 'edit'
         end
     end
 

@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            session[:user_id] = @user.id
             flash[:success] = "welcome to my app #{@user.username},You seccessfull to signed up"
             redirect_to articles_path
         else
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
     private
     
     def set_user
-      @user = User.find(params[:id])
+      @user = @current_user
     end
 
     def user_params
