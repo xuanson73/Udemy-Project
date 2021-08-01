@@ -1,4 +1,7 @@
 <div id="page-content">
     <h1 class="text-center mt-5">Listing all Article</h1>
     <%= render 'article'%>
+    <div class="flickr_pagination">
+        <%= will_paginate @articles, :container => false %>
+    </div>
 </div>

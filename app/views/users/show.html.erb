@@ -1,10 +1,15 @@
 <div id="page-content">
-    <div class="text-content mt-5 center">
-        <h1 >Profile</h1>
-       <p> username: <%=  @user.username %> </p>
-        <br><p> email: <%=  @user.email%></p>
-        <%= gravatar_for @user, size: 200 %>
-        <br>
-        <%= link_to "Edit Profile", edit_user_path(@user), class:"btn btn-outline-success"%>
+    <div class="text-content mt-5 center center">
+      <h1 >Profile</h1>
+      <p> username: <%=  @user.username %> </p>
+      <br><p> email: <%=  @user.email%></p>
+      <%= gravatar_for @user, size: 200 %>
+      <br>
+      <% if logged_in? && @user == current_user  %>
+      <%= link_to "Edit Profile", edit_user_path(@user), class:"btn btn-outline-success space"%>
+      <% end %>
     </div>
 <%= render 'articles/article'%>
+<div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+</div>

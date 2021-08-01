@@ -1,5 +1,5 @@
 <div class="container">
-        <% @articles.each do |article| %>
+    <% @articles.each do |article| %>
         <div class="row justify-content-md-center">
             <div class="col-8 mt-1">
                 <div class="card text-center border-success mb-3 shadow-lg p-3 mb-5 bg-white rounded">
@@ -10,8 +10,10 @@
                         <h5 class="card-title"><%= link_to article.title, articles_path(article) %></h5>
                         <p class="card-text"><%= article.description%></p>
                         <%= link_to "Show", article_path(article), class:"btn btn-outline-primary"%>
-                        <%= link_to "Edit", edit_article_path(article), class:"btn btn-outline-success"%>
-                        <%= link_to "Destroy", article_path(article), class:"btn btn-outline-danger", method: :delete, data:{confirm: "Are you Sure?"}%>
+                        <% if logged_in? && article.user == current_user %>
+                            <%= link_to "Edit", edit_article_path(article), class:"btn btn-outline-success"%>
+                            <%= link_to "Destroy", article_path(article), class:"btn btn-outline-danger", method: :delete, data:{confirm: "Are you Sure?"}%>
+                        <% end %>
                     </div>
                     <div class="card-footer text-muted">
                       <small>
@@ -24,7 +26,10 @@
                 </div>
             </div>
         </div>
-        <%end%>
-    </div>    
-     <%= link_to 'Home page', root_path%>
+    <%end%>
+</div>    
+<div class="btn-outline-light center">
+    <%= link_to 'Home page', root_path%>
     <br><%= link_to 'Creat a new article', new_article_path%>
+</div>
+    

@@ -2,15 +2,16 @@ class UsersController < ApplicationController
     before_action :set_user, only:[:destroy, :edit, :update, :show]
 
     def index
-        @user =User.all
+        @users = User.paginate(page: params[:page], per_page: 3)
     end
+
     def new
         @user = User.new
     end
 
     def show
         @user = User.find(params[:id])
-        @articles = @user.articles
+        @articles = @user.articles.paginate(page: params[:page], per_page: 3)
     end
     
     def create
@@ -36,10 +37,16 @@ class UsersController < ApplicationController
         end
     end
 
+    def destroy
+        @user.destroy
+        flash[:success] = "User was destroyed"
+        redirect_to users_path
+    end
+
     private
     
     def set_user
-      @user = @current_user
+      @user = User.find(params[:id])
     end
 
     def user_params
